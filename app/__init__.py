@@ -13,10 +13,9 @@ def create_app(test_config=None):
         EMPTY = True
     )
 
-    if test_config is None:
-        # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=True)
-    else:
+    # always load config.py
+    app.config.from_pyfile('config.py', silent=True)
+    if test_config is not None:
         # load the test config if passed in
         app.config.from_mapping(test_config)
 
@@ -27,5 +26,8 @@ def create_app(test_config=None):
         pass
 
     # this is where routes go
+
+    from . import db
+    db.add_app_hooks(app)
 
     return app
