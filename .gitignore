@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # MongoDB Atlas cert
-config/*.crt
+*.crt
